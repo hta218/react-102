@@ -44,7 +44,9 @@ function ProductSpotlight({
         {...attributes}
         className="grid min-h-64 place-items-center bg-ink p-panel-wide text-text-inverse"
       >
-        <p className={eyebrow()}>Select a product to spotlight</p>
+        <p className={eyebrow({ tone: "warm" })}>
+          Select a product to spotlight
+        </p>
       </section>
     );
   }
