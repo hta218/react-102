@@ -41,7 +41,11 @@ export const schema = createSchema({
         type: "section-content",
         justify: "center",
         children: [
-          { type: "subheading", content: "Forward / Field equipment 2026" },
+          {
+            type: "subheading",
+            content: "Forward / Field equipment 2026",
+            tone: "warm",
+          },
           {
             type: "heading",
             as: "h1",
@@ -56,16 +60,23 @@ export const schema = createSchema({
               "Layerable apparel, precise footwear, and low-profile carry systems made to move together.",
           },
           {
-            type: "button",
-            label: "Shop all equipment",
-            href: "/shop",
-            intent: "signal",
-          },
-          {
-            type: "button",
-            label: "How we test",
-            href: "/field-testing",
-            intent: "link",
+            type: "buttons",
+            children: [
+              {
+                type: "button",
+                label: "Shop all equipment",
+                href: "/shop",
+                intent: "signal",
+                tone: "light",
+              },
+              {
+                type: "button",
+                label: "How we test",
+                href: "/field-testing",
+                intent: "link",
+                tone: "light",
+              },
+            ],
           },
         ],
       },

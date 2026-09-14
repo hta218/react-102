@@ -1,5 +1,7 @@
 import { createSchema } from "@weaverse/schema";
 
+import { blockSpacingInputs } from "@/components/section/inputs";
+
 export const schema = createSchema({
   type: "heading",
   title: "Heading",
@@ -49,8 +51,10 @@ export const schema = createSchema({
             ],
           },
         },
+        { type: "color", name: "color", label: "Text color" },
       ],
     },
+    { group: "Spacing", inputs: blockSpacingInputs },
   ],
   presets: {
     content: "Section heading",

@@ -44,7 +44,9 @@ function ProductSpotlight({
         {...attributes}
         className="grid min-h-64 place-items-center bg-ink p-panel-wide text-text-inverse"
       >
-        <p className={eyebrow()}>Select a product to spotlight</p>
+        <p className={eyebrow({ tone: "warm" })}>
+          Select a product to spotlight
+        </p>
       </section>
     );
   }
@@ -100,7 +102,7 @@ function ProductSpotlight({
         </ul>
         <Link
           className={cn(
-            cta(),
+            cta({ tone: "light" }),
             "self-start short-desktop:min-h-10 short-desktop:py-2",
           )}
           href={`/products/${product.handle}`}

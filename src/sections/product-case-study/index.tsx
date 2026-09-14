@@ -41,7 +41,9 @@ function ProductCaseStudy({
         {...attributes}
         className="grid min-h-64 place-items-center bg-ink p-panel-wide text-text-inverse"
       >
-        <p className={eyebrow()}>Select a product for this case study</p>
+        <p className={eyebrow({ tone: "warm" })}>
+          Select a product for this case study
+        </p>
       </section>
     );
   }
@@ -53,7 +55,7 @@ function ProductCaseStudy({
       className="grid grid-cols-split-75 bg-ink text-text-inverse max-md:grid-cols-1"
     >
       <div className="self-center p-[clamp(50px,7vw,110px)] max-md:order-2">
-        <p className={eyebrow()}>{eyebrowLabel}</p>
+        <p className={eyebrow({ tone: "warm" })}>{eyebrowLabel}</p>
         <h2 className="text-balance font-heading text-field-case-title leading-field-case">
           {product.title}
         </h2>
@@ -70,7 +72,7 @@ function ProductCaseStudy({
           ))}
         </dl>
         <Link
-          className={cta({ intent: "light" })}
+          className={cta({ tone: "light" })}
           href={`/products/${product.handle}`}
         >
           {ctaLabel}

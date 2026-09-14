@@ -1,7 +1,9 @@
 "use client";
 
+import type { VariantProps } from "class-variance-authority";
+
 import { cn } from "@/lib/cn";
-import { eyebrow } from "@/lib/presentation/variants";
+import { blockSpacing, eyebrow } from "@/lib/presentation/variants";
 import {
   elementAttributes,
   type WeaverseElementProps,
@@ -9,9 +11,12 @@ import {
 
 type SubheadingTone = "strong" | "signal" | "warm";
 
-export interface SubheadingProps extends WeaverseElementProps {
+export interface SubheadingProps
+  extends VariantProps<typeof blockSpacing>,
+    WeaverseElementProps {
   content: string;
   tone?: SubheadingTone;
+  color?: string;
   className?: string;
 }
 
@@ -23,14 +28,22 @@ export interface SubheadingProps extends WeaverseElementProps {
  */
 function Subheading({
   className,
+  color,
   content,
+  marginBottom,
+  marginTop,
   tone = "strong",
   ...rest
 }: SubheadingProps) {
   return (
     <p
       {...elementAttributes(rest)}
-      className={cn(eyebrow({ tone }), className)}
+      className={cn(
+        eyebrow({ tone }),
+        blockSpacing({ marginTop, marginBottom }),
+        className,
+      )}
+      style={{ color }}
     >
       {content}
     </p>

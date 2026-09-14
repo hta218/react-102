@@ -17,7 +17,7 @@ export const schema = createSchema({
         type: "section-content",
         justify: "center",
         children: [
-          { type: "subheading", content: "Material standard" },
+          { type: "subheading", content: "Material standard", tone: "warm" },
           { type: "heading", content: "Fewer materials. Better understood." },
           {
             type: "paragraph",
@@ -25,16 +25,23 @@ export const schema = createSchema({
               "Every fabric, foam, buckle, and compound is selected around useful life, field repair, and performance you can actually feel.",
           },
           {
-            type: "button",
-            label: "Explore materials",
-            href: "/materials",
-            intent: "light",
-          },
-          {
-            type: "button",
-            label: "About Forward",
-            href: "/about",
-            intent: "link",
+            type: "buttons",
+            children: [
+              {
+                type: "button",
+                label: "Explore materials",
+                href: "/materials",
+                intent: "signal",
+                tone: "light",
+              },
+              {
+                type: "button",
+                label: "About Forward",
+                href: "/about",
+                intent: "link",
+                tone: "light",
+              },
+            ],
           },
         ],
       },

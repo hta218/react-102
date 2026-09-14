@@ -29,7 +29,11 @@ export const schema = createSchema({
       {
         type: "section-content",
         children: [
-          { type: "subheading", content: "Collection essentials" },
+          {
+            type: "subheading",
+            content: "Collection essentials",
+            tone: "warm",
+          },
           { type: "heading", content: "A focused kit for a full day out." },
         ],
       },

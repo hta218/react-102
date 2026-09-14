@@ -47,7 +47,9 @@ function CollectionIndex({
               sizes="(min-width: 820px) 34vw, 100vw"
             />
             <div className="absolute right-0 bottom-0 left-0 z-1 p-8.5">
-              <span className={eyebrow()}>{collection.fieldCode}</span>
+              <span className={eyebrow({ tone: "warm" })}>
+                {collection.fieldCode}
+              </span>
               <h3 className="mt-2 mb-4 font-heading text-system-title leading-display-relaxed">
                 {collection.title}
               </h3>

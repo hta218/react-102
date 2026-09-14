@@ -33,7 +33,7 @@
   /* Signal and state */
   --color-signal: #d9ff57;
   --color-signal-strong: #485c00;
-  --color-accent-warm: #ff9b77;
+  --color-accent-warm: #ffb89c;
   --color-focus: #b8dc38;
   --color-focus-field: rgba(23, 61, 45, 0.18);
   --background-image-field-index-overlay: linear-gradient(
@@ -169,6 +169,13 @@
   --spacing-page-gap: clamp(48px, 10vw, 150px);
   --spacing-panel: clamp(45px, 5vw, 80px);
   --spacing-panel-wide: clamp(45px, 6vw, 95px);
+  /* Author-controlled block rhythm for shared elements. One clamp per step
+   * carries the responsive range, so a merchant picks "Medium" once instead of
+   * a value per breakpoint. */
+  --spacing-block-sm: clamp(0.75rem, 1.5vw, 1.25rem);
+  --spacing-block-md: clamp(1.25rem, 2.5vw, 2.25rem);
+  --spacing-block-lg: clamp(2rem, 4vw, 3.75rem);
+  --spacing-block-xl: clamp(3rem, 6vw, 6rem);
   --spacing-prose-block: 1.4em;
   --spacing-prose-subhead: 0.8em;
   --spacing-prose-paragraph: 1em;
@@ -203,11 +210,7 @@
   --spacing-announcement: 1.875rem;
   --spacing-touch: 2.75rem;
   --shadow-button: 4px 4px 0 var(--color-ink);
-  --shadow-button-hover: 2px 2px 0 var(--color-ink);
   --shadow-button-inverse: 4px 4px 0 var(--color-text-inverse);
-  --shadow-button-inverse-hover: 2px 2px 0 var(--color-text-inverse);
-  --shadow-button-signal: 4px 4px 0 var(--color-signal);
-  --shadow-button-signal-hover: 2px 2px 0 var(--color-signal);
   --shadow-panel: 0 28px 48px rgb(16 22 18 / 16%);
   --shadow-collection-feature: 30px -30px 0 var(--color-signal);
   --shadow-collection-feature-mobile: 14px -14px 0 var(--color-signal);

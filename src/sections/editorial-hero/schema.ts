@@ -31,7 +31,11 @@ export const schema = createSchema({
         type: "section-content",
         justify: "center",
         children: [
-          { type: "subheading", content: "Custom page / About Forward" },
+          {
+            type: "subheading",
+            content: "Custom page / About Forward",
+            tone: "warm",
+          },
           {
             type: "heading",
             as: "h1",

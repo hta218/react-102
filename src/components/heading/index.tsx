@@ -1,7 +1,9 @@
 "use client";
 
+import type { VariantProps } from "class-variance-authority";
+
 import { cn } from "@/lib/cn";
-import { sectionHeading } from "@/lib/presentation/variants";
+import { blockSpacing, sectionHeading } from "@/lib/presentation/variants";
 import {
   elementAttributes,
   type WeaverseElementProps,
@@ -21,10 +23,13 @@ type HeadingSize =
   | "feature";
 type HeadingTag = "h1" | "h2" | "h3" | "h4";
 
-export interface HeadingProps extends WeaverseElementProps {
+export interface HeadingProps
+  extends VariantProps<typeof blockSpacing>,
+    WeaverseElementProps {
   content: string;
   size?: HeadingSize;
   as?: HeadingTag;
+  color?: string;
   className?: string;
 }
 
@@ -39,14 +44,22 @@ export interface HeadingProps extends WeaverseElementProps {
 function Heading({
   as: Tag = "h2",
   className,
+  color,
   content,
+  marginBottom,
+  marginTop,
   size = "section",
   ...rest
 }: HeadingProps) {
   return (
     <Tag
       {...elementAttributes(rest)}
-      className={cn(sectionHeading({ size }), className)}
+      className={cn(
+        sectionHeading({ size }),
+        blockSpacing({ marginTop, marginBottom }),
+        className,
+      )}
+      style={{ color }}
     >
       {content}
     </Tag>
