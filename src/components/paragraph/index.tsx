@@ -22,6 +22,7 @@ export interface ParagraphProps
     WeaverseElementProps {
   content: string;
   width?: ParagraphWidth;
+  color?: string;
   className?: string;
 }
 
@@ -33,6 +34,7 @@ export interface ParagraphProps
  */
 function Paragraph({
   className,
+  color,
   content,
   marginBottom,
   marginTop,
@@ -47,6 +49,7 @@ function Paragraph({
         blockSpacing({ marginTop, marginBottom }),
         className,
       )}
+      style={{ color }}
     >
       {content}
     </p>

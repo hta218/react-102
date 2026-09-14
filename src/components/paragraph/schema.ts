@@ -23,6 +23,7 @@ export const schema = createSchema({
             ],
           },
         },
+        { type: "color", name: "color", label: "Text color" },
       ],
     },
     { group: "Spacing", inputs: blockSpacingInputs },
