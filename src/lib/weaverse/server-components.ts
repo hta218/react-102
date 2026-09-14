@@ -18,6 +18,7 @@ import type { WeaverseNextComponent } from "@weaverse/next";
 
 import { loader as collectionIndexLoader } from "@/sections/collection-index/loader";
 import { loader as featuredProductsLoader } from "@/sections/featured-products/loader";
+import { loader as heroSlideLoader } from "@/sections/hero-slideshow/slide/loader";
 import { loader as homeHeroLoader } from "@/sections/home-hero/loader";
 import { loader as kitCalloutLoader } from "@/sections/kit-callout/loader";
 import { loader as productCaseStudyLoader } from "@/sections/product-case-study/loader";
@@ -36,6 +37,7 @@ import { SECTION_SCHEMAS } from "./section-schemas";
 const LOADERS: Record<string, WeaverseNextComponent["loader"]> = {
   "collection-index": collectionIndexLoader,
   "featured-products": featuredProductsLoader,
+  "hero-slide": heroSlideLoader,
   "home-hero": homeHeroLoader,
   "kit-callout": kitCalloutLoader,
   "product-case-study": productCaseStudyLoader,

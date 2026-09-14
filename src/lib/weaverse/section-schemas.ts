@@ -28,6 +28,8 @@ import { schema as editorialHero } from "@/sections/editorial-hero/schema";
 import { schema as editorialOverlayHero } from "@/sections/editorial-overlay-hero/schema";
 import { schema as featuredProducts } from "@/sections/featured-products/schema";
 import { schema as fieldPractice } from "@/sections/field-practice/schema";
+import { schema as heroSlideshow } from "@/sections/hero-slideshow/schema";
+import { schema as heroSlide } from "@/sections/hero-slideshow/slide/schema";
 import { schema as homeHero } from "@/sections/home-hero/schema";
 import { schema as kitCallout } from "@/sections/kit-callout/schema";
 import { schema as mainProduct } from "@/sections/main-product/schema";
@@ -59,6 +61,8 @@ export const SECTION_SCHEMAS: readonly SchemaType[] = [
 
   /* INDEX */
   homeHero,
+  heroSlideshow,
+  heroSlide,
   featuredProducts,
   collectionIndex,
   productSpotlight,

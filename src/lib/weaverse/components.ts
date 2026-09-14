@@ -38,6 +38,8 @@ import * as EditorialHero from "@/sections/editorial-hero";
 import * as EditorialOverlayHero from "@/sections/editorial-overlay-hero";
 import * as FeaturedProducts from "@/sections/featured-products";
 import * as FieldPractice from "@/sections/field-practice";
+import * as HeroSlideshow from "@/sections/hero-slideshow";
+import * as HeroSlide from "@/sections/hero-slideshow/slide";
 import * as HomeHero from "@/sections/home-hero";
 import * as KitCallout from "@/sections/kit-callout";
 import * as MainProduct from "@/sections/main-product";
@@ -87,6 +89,8 @@ export const WEAVERSE_COMPONENTS: WeaverseNextComponent[] = [
 
   /* INDEX */
   entry(HomeHero),
+  entry(HeroSlideshow),
+  entry(HeroSlide),
   entry(FeaturedProducts),
   entry(CollectionIndex),
   entry(ProductSpotlight),
