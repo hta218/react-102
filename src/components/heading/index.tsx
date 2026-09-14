@@ -29,6 +29,7 @@ export interface HeadingProps
   content: string;
   size?: HeadingSize;
   as?: HeadingTag;
+  color?: string;
   className?: string;
 }
 
@@ -43,6 +44,7 @@ export interface HeadingProps
 function Heading({
   as: Tag = "h2",
   className,
+  color,
   content,
   marginBottom,
   marginTop,
@@ -57,6 +59,7 @@ function Heading({
         blockSpacing({ marginTop, marginBottom }),
         className,
       )}
+      style={{ color }}
     >
       {content}
     </Tag>
