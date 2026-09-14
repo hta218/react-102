@@ -23,6 +23,12 @@ export const schema = createSchema({
             ],
           },
         },
+        {
+          type: "color",
+          name: "color",
+          label: "Text color",
+          helpText: "Overrides the tone color when set.",
+        },
       ],
     },
     { group: "Spacing", inputs: blockSpacingInputs },

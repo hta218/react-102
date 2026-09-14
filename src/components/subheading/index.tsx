@@ -16,6 +16,7 @@ export interface SubheadingProps
     WeaverseElementProps {
   content: string;
   tone?: SubheadingTone;
+  color?: string;
   className?: string;
 }
 
@@ -27,6 +28,7 @@ export interface SubheadingProps
  */
 function Subheading({
   className,
+  color,
   content,
   marginBottom,
   marginTop,
@@ -41,6 +43,7 @@ function Subheading({
         blockSpacing({ marginTop, marginBottom }),
         className,
       )}
+      style={{ color }}
     >
       {content}
     </p>
