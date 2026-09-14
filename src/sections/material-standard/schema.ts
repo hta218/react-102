@@ -17,7 +17,7 @@ export const schema = createSchema({
         type: "section-content",
         justify: "center",
         children: [
-          { type: "subheading", content: "Material standard" },
+          { type: "subheading", content: "Material standard", tone: "warm" },
           { type: "heading", content: "Fewer materials. Better understood." },
           {
             type: "paragraph",

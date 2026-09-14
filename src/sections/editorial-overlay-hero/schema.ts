@@ -17,7 +17,11 @@ export const schema = createSchema({
         type: "section-content",
         justify: "end",
         children: [
-          { type: "subheading", content: "Custom page / Field testing" },
+          {
+            type: "subheading",
+            content: "Custom page / Field testing",
+            tone: "warm",
+          },
           {
             type: "heading",
             as: "h1",
