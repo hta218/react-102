@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { type ReactNode, useEffect, useRef, useState } from "react";
-
+import { AddToCartForm } from "@/components/add-to-cart-form";
 import { cn } from "@/lib/cn";
 import { eyebrow } from "@/lib/presentation/variants";
 import { formatMoney } from "@/lib/storefront/format";
@@ -21,7 +21,6 @@ import {
   saleCompareAtPrice,
 } from "@/lib/storefront/product-state";
 import type { Product, ProductColorway } from "@/lib/storefront/types";
-import { AddToCartForm } from "./add-to-cart-form";
 
 interface ProductDetailProps {
   product: Product;

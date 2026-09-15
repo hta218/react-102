@@ -1,5 +1,6 @@
 "use client";
 
+import { cva } from "class-variance-authority";
 import { useEffect, useRef, useState } from "react";
 import { announceCartAdd } from "@/lib/cart/mini-cart-signal";
 import {
@@ -20,29 +21,55 @@ import {
 } from "@/lib/storefront/product-state";
 import type { Product } from "@/lib/storefront/types";
 
+type Surface = "dark" | "light";
+
 interface AddToCartFormProps {
   product: Product;
   selection: ProductSelection;
+  /** The surface behind the form: the PDP's ink panel, or a light section. */
+  tone?: Surface;
 }
 
 const ACTIONS_CLASS =
   "mt-7.5 grid grid-cols-[112px_1fr] gap-2 max-sm:grid-cols-1";
-const QUANTITY_CLASS =
-  "grid h-13 grid-cols-stepper border border-border-dark-strong max-sm:h-12";
+/* Every colour that has to read against the surface follows `tone`. */
+const quantityBox = cva("grid h-13 grid-cols-stepper border max-sm:h-12", {
+  variants: {
+    tone: { dark: "border-border-dark-strong", light: "border-ink" },
+  },
+});
 const QUANTITY_BUTTON_CLASS =
   "bg-transparent text-control-lg hover:bg-signal hover:text-ink disabled:text-text-disabled disabled:hover:bg-transparent disabled:hover:text-text-disabled";
 const QUANTITY_OUTPUT_CLASS = "grid place-items-center font-bold";
 /* The buy button is the shared yellow CTA on a dark panel, plus the disabled
  * state that only a real form needs. */
-const ADD_TO_CART_CLASS = cn(
-  cta({ tone: "light" }),
-  "disabled:border-control-disabled disabled:bg-control-disabled disabled:text-text-disabled disabled:opacity-46 disabled:shadow-none disabled:hover:border-control-disabled disabled:hover:bg-control-disabled disabled:hover:text-text-disabled disabled:hover:shadow-none",
-);
-const FEEDBACK_CLASS = "mt-3 mb-0 min-h-6 text-caption font-bold text-signal";
-const NOTE_CLASS =
-  "mt-4.5 mb-0 border-signal border-l-2 px-3.5 py-3 font-body text-micro leading-rich-copy text-text-dark-muted tracking-link uppercase";
+const ADD_TO_CART_DISABLED_CLASS =
+  "disabled:border-control-disabled disabled:bg-control-disabled disabled:text-text-disabled disabled:opacity-46 disabled:shadow-none disabled:hover:border-control-disabled disabled:hover:bg-control-disabled disabled:hover:text-text-disabled disabled:hover:shadow-none";
 
-function DemoAddToCartForm({ product, selection }: AddToCartFormProps) {
+function addToCartClass(tone: Surface) {
+  /* `cta` names its shadow colour, which is the opposite of the surface. */
+  return cn(
+    cta({ tone: tone === "dark" ? "light" : "dark" }),
+    ADD_TO_CART_DISABLED_CLASS,
+  );
+}
+const feedback = cva("mt-3 mb-0 min-h-6 text-caption font-bold", {
+  variants: { tone: { dark: "text-signal", light: "text-signal-strong" } },
+});
+const note = cva(
+  "mt-4.5 mb-0 border-signal border-l-2 px-3.5 py-3 font-body text-micro leading-rich-copy tracking-link uppercase",
+  {
+    variants: {
+      tone: { dark: "text-text-dark-muted", light: "text-text-muted" },
+    },
+  },
+);
+
+function DemoAddToCartForm({
+  product,
+  selection,
+  tone = "dark",
+}: AddToCartFormProps) {
   const [quantity, setQuantity] = useState(1);
   const [status, setStatus] = useState("");
   const size = selection.selectedOptions.Size;
@@ -77,7 +104,7 @@ function DemoAddToCartForm({ product, selection }: AddToCartFormProps) {
   return (
     <>
       <div className={ACTIONS_CLASS}>
-        <div className={QUANTITY_CLASS}>
+        <div className={quantityBox({ tone })}>
           <button
             className={QUANTITY_BUTTON_CLASS}
             type="button"
@@ -107,7 +134,7 @@ function DemoAddToCartForm({ product, selection }: AddToCartFormProps) {
           </button>
         </div>
         <button
-          className={ADD_TO_CART_CLASS}
+          className={addToCartClass(tone)}
           type="button"
           disabled={!selection.variant.availableForSale}
           onClick={handleAdd}
@@ -119,10 +146,10 @@ function DemoAddToCartForm({ product, selection }: AddToCartFormProps) {
           })}
         </button>
       </div>
-      <p className={FEEDBACK_CLASS} role="status">
+      <p className={feedback({ tone })} role="status">
         {status}
       </p>
-      <p className={NOTE_CLASS}>
+      <p className={note({ tone })}>
         Demo cart only — items stay in this browser and no checkout is
         connected.
       </p>
@@ -130,7 +157,10 @@ function DemoAddToCartForm({ product, selection }: AddToCartFormProps) {
   );
 }
 
-function ShopifyAddToCartForm({ selection }: AddToCartFormProps) {
+function ShopifyAddToCartForm({
+  selection,
+  tone = "dark",
+}: AddToCartFormProps) {
   const { formProps, pending, register, selectedVariant } =
     useShopifyProductForm();
   const [quantity, setQuantity] = useState(1);
@@ -183,7 +213,7 @@ function ShopifyAddToCartForm({ selection }: AddToCartFormProps) {
       <input type="hidden" {...register("merchandiseId", {})} />
       <input type="hidden" {...register("quantity", { value: quantity })} />
       <div className={ACTIONS_CLASS}>
-        <div className={QUANTITY_CLASS}>
+        <div className={quantityBox({ tone })}>
           <button
             className={QUANTITY_BUTTON_CLASS}
             aria-label="Decrease quantity"
@@ -214,7 +244,7 @@ function ShopifyAddToCartForm({ selection }: AddToCartFormProps) {
         </div>
         <button
           {...register("addToCart", {})}
-          className={ADD_TO_CART_CLASS}
+          className={addToCartClass(tone)}
           disabled={
             pending ||
             selectedVariant === null ||
@@ -233,10 +263,10 @@ function ShopifyAddToCartForm({ selection }: AddToCartFormProps) {
           })}
         </button>
       </div>
-      <p className={FEEDBACK_CLASS} role="status" aria-live="polite">
+      <p className={feedback({ tone })} role="status" aria-live="polite">
         {pending ? "Updating your cart…" : ""}
       </p>
-      <p className={NOTE_CLASS}>
+      <p className={note({ tone })}>
         Secure Shopify cart. Checkout is handed off to Shopify; no payment runs
         on this page.
       </p>
