@@ -15,6 +15,7 @@ import type { SchemaType } from "@weaverse/schema";
 import { schema as button } from "@/components/button/schema";
 import { schema as buttons } from "@/components/buttons/schema";
 import { schema as heading } from "@/components/heading/schema";
+import { schema as main } from "@/components/main/schema";
 import { schema as paragraph } from "@/components/paragraph/schema";
 import { schema as sectionContent } from "@/components/section-content/schema";
 import { schema as subheading } from "@/components/subheading/schema";
@@ -51,6 +52,9 @@ import { schema as statBand } from "@/sections/stat-band/schema";
 import { schema as systemManifest } from "@/sections/system-manifest/schema";
 
 export const SECTION_SCHEMAS: readonly SchemaType[] = [
+  /* Page root. Overrides the SDK default so runtime props stay off the DOM. */
+  main,
+
   /* Shared elements, usable inside any composed section. */
   heading,
   subheading,

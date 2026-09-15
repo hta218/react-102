@@ -25,6 +25,7 @@ import type { WeaverseNextComponent } from "@weaverse/next";
 import * as Button from "@/components/button";
 import * as Buttons from "@/components/buttons";
 import * as Heading from "@/components/heading";
+import * as Main from "@/components/main";
 import * as Paragraph from "@/components/paragraph";
 import * as SectionContent from "@/components/section-content";
 import * as Subheading from "@/components/subheading";
@@ -79,6 +80,9 @@ function entry(module: {
 }
 
 export const WEAVERSE_COMPONENTS: WeaverseNextComponent[] = [
+  /* Page root. Overrides the SDK default so runtime props stay off the DOM. */
+  entry(Main),
+
   /* Shared elements, usable inside any composed section. */
   entry(Heading),
   entry(Subheading),
