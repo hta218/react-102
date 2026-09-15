@@ -1,5 +1,7 @@
 "use client";
 
+import { IMAGES_PLACEHOLDERS } from "@weaverse/schema";
+import Image from "next/image";
 import type { ReactNode } from "react";
 import { ProductCard } from "@/components/product-card";
 import { Section } from "@/components/section";
@@ -12,7 +14,19 @@ interface FeaturedProductsProps extends WeaverseElementProps {
   loaderData?: { products: readonly Product[] };
 }
 
-/** A four-up product grid introduced by a heading, body copy, and one link. */
+/** Cards shown until the merchant picks products, so a fresh section reads as a grid. */
+const PLACEHOLDER_IMAGES = [
+  IMAGES_PLACEHOLDERS.product_1,
+  IMAGES_PLACEHOLDERS.product_2,
+  IMAGES_PLACEHOLDERS.product_3,
+  IMAGES_PLACEHOLDERS.product_4,
+];
+
+/**
+ * A four-up product grid introduced by a heading block on the left and a link
+ * block on the right. With no products picked it shows placeholder cards in
+ * the same geometry instead of collapsing to an empty band.
+ */
 function FeaturedProducts({
   children,
   loaderData,
@@ -21,19 +35,48 @@ function FeaturedProducts({
   const products = loaderData?.products ?? [];
   return (
     <Section {...rest} aria-labelledby="home-featured-title">
-      <header className="mb-11.25 grid grid-cols-feature-row items-end gap-10 max-md:grid-cols-1 max-md:gap-5">
+      <header className="mb-11.25 flex items-end justify-between gap-10 max-md:flex-col max-md:items-start max-md:gap-5">
         {children}
       </header>
       <div className="grid grid-cols-4 gap-4.5 max-md:grid-cols-2 max-sm:gap-2.5">
-        {products.map((product, index) => (
-          <ProductCard
-            key={product.handle}
-            product={product}
-            priority={index < 2}
-          />
-        ))}
+        {products.length > 0
+          ? products.map((product, index) => (
+              <ProductCard
+                key={product.handle}
+                product={product}
+                priority={index < 2}
+              />
+            ))
+          : PLACEHOLDER_IMAGES.map((src) => (
+              <PlaceholderCard key={src} src={src} />
+            ))}
       </div>
     </Section>
+  );
+}
+
+/* Weaverse's own placeholder art. Served from Weaverse's Shopify CDN as SVG,
+ * outside this theme's `remotePatterns`, so it bypasses the optimizer. */
+function PlaceholderCard({ src }: { src: string }) {
+  return (
+    <article className="min-w-0" aria-hidden="true">
+      <Image
+        className="aspect-4/5 bg-media-placeholder object-cover"
+        src={src}
+        alt=""
+        width={1024}
+        height={1280}
+        unoptimized
+      />
+      <div className="flex justify-between gap-4.5 border-ink border-t pt-3.5 pb-5.5">
+        <span className="font-heading text-card-title font-semibold text-text-muted max-sm:text-copy">
+          Product title
+        </span>
+        <span className="whitespace-nowrap text-label text-text-muted">
+          $00.00
+        </span>
+      </div>
+    </article>
   );
 }
 

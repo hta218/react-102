@@ -38,16 +38,6 @@ export const schema = createSchema({
       },
       {
         type: "section-content",
-        children: [
-          {
-            type: "paragraph",
-            content:
-              "A weather layer, breathable midlayer, close-body carry, and trail shoe form the shortest route to a complete Forward system.",
-          },
-        ],
-      },
-      {
-        type: "section-content",
         justify: "end",
         children: [
           {
