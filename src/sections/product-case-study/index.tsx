@@ -1,7 +1,9 @@
 "use client";
 
+import { IMAGES_PLACEHOLDERS } from "@weaverse/schema";
 import Image from "next/image";
 import Link from "next/link";
+import { cn } from "@/lib/cn";
 import { cta, eyebrow } from "@/lib/presentation/variants";
 import type { Product, StorefrontImage } from "@/lib/storefront/types";
 import {
@@ -16,6 +18,22 @@ interface ProductCaseStudyProps extends WeaverseElementProps {
   loaderData?: { product: Product; image: StorefrontImage } | null;
 }
 
+/* Shown until a product is picked (or when it no longer resolves), so a fresh
+ * section keeps its real layout instead of collapsing to a notice. */
+const PLACEHOLDER = {
+  title: "Product title",
+  description:
+    "A product description appears here once a product is selected, followed by its spec list.",
+  specs: [
+    { label: "Weight", value: "—" },
+    { label: "Material", value: "—" },
+    { label: "Fit", value: "—" },
+    { label: "Care", value: "—" },
+  ],
+};
+
+const IMAGE_CLASS = "h-190 object-cover max-md:h-[62svh]";
+
 /** A single product examined in depth: description, spec list, and image. */
 function ProductCaseStudy({
   eyebrowLabel,
@@ -23,31 +41,10 @@ function ProductCaseStudy({
   loaderData,
   ...rest
 }: ProductCaseStudyProps) {
-  /* No selection, or a product that no longer resolves: render nothing rather
-   * than a case study with no case. */
-  /* No product selected, or one that no longer resolves.
-   *
-   * Returning nothing is right on the storefront, but wrong inside Studio: a
-   * section that renders nothing cannot be selected, so a merchant could never
-   * reach it to pick a product. When the runtime is rendering us — which the
-   * identity attributes tell us — keep a selectable placeholder instead. */
-  if (!loaderData) {
-    const attributes = elementAttributes(rest);
-    if (attributes["data-wv-id"] === undefined) {
-      return null;
-    }
-    return (
-      <section
-        {...attributes}
-        className="grid min-h-64 place-items-center bg-ink p-panel-wide text-text-inverse"
-      >
-        <p className={eyebrow({ tone: "warm" })}>
-          Select a product for this case study
-        </p>
-      </section>
-    );
-  }
-  const { image, product } = loaderData;
+  const product = loaderData?.product ?? null;
+  const image = loaderData?.image ?? null;
+  const specs = product?.specs ?? PLACEHOLDER.specs;
+  const ctaClass = cta({ tone: "light" });
 
   return (
     <section
@@ -57,11 +54,11 @@ function ProductCaseStudy({
       <div className="self-center p-[clamp(50px,7vw,110px)] max-md:order-2">
         <p className={eyebrow({ tone: "warm" })}>{eyebrowLabel}</p>
         <h2 className="text-balance font-heading text-field-case-title leading-field-case">
-          {product.title}
+          {product?.title ?? PLACEHOLDER.title}
         </h2>
-        <p>{product.description}</p>
+        <p>{product?.description ?? PLACEHOLDER.description}</p>
         <dl className="my-8.75 border-border-dark border-t">
-          {product.specs.map((spec) => (
+          {specs.map((spec) => (
             <div
               key={spec.label}
               className="flex justify-between border-border-dark border-b py-3.25"
@@ -71,21 +68,35 @@ function ProductCaseStudy({
             </div>
           ))}
         </dl>
-        <Link
-          className={cta({ tone: "light" })}
-          href={`/products/${product.handle}`}
-        >
-          {ctaLabel}
-        </Link>
+        {product ? (
+          <Link className={ctaClass} href={`/products/${product.handle}`}>
+            {ctaLabel}
+          </Link>
+        ) : (
+          <span className={ctaClass}>{ctaLabel}</span>
+        )}
       </div>
-      <Image
-        className="h-190 object-cover max-md:h-[62svh]"
-        src={image.src}
-        alt={image.alt}
-        width={image.width}
-        height={image.height}
-        sizes="(min-width: 820px) 55vw, 100vw"
-      />
+      {image ? (
+        <Image
+          className={IMAGE_CLASS}
+          src={image.src}
+          alt={image.alt}
+          width={image.width}
+          height={image.height}
+          sizes="(min-width: 820px) 55vw, 100vw"
+        />
+      ) : (
+        /* Weaverse placeholder art: SVG on Weaverse's CDN, outside this
+         * theme's `remotePatterns`, so it bypasses the optimizer. */
+        <Image
+          className={cn(IMAGE_CLASS, "bg-media-placeholder")}
+          src={IMAGES_PLACEHOLDERS.product_3}
+          alt=""
+          width={1024}
+          height={1024}
+          unoptimized
+        />
+      )}
     </section>
   );
 }
