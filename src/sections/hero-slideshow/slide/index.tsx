@@ -1,5 +1,6 @@
 "use client";
 
+import { IMAGES_PLACEHOLDERS } from "@weaverse/schema";
 import { cva } from "class-variance-authority";
 import Image from "next/image";
 import Link from "next/link";
@@ -209,21 +210,18 @@ function FeaturedBadge({
   );
 }
 
+/* Weaverse's generic placeholder art. Served from Weaverse's Shopify CDN as
+ * SVG, outside this theme's `remotePatterns`, so it bypasses the optimizer. */
 function ThumbnailPlaceholder() {
   return (
-    <span className="grid size-14 shrink-0 place-items-center bg-media-placeholder text-ink/45">
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 24 24"
-        className="size-6"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={1.5}
-      >
-        <rect x="3" y="4" width="18" height="16" />
-        <path d="m3 17 5-6 4 5 3-3 6 4" />
-      </svg>
-    </span>
+    <Image
+      className="size-14 shrink-0 bg-media-placeholder object-cover"
+      src={IMAGES_PLACEHOLDERS.image}
+      alt=""
+      width={56}
+      height={56}
+      unoptimized
+    />
   );
 }
 
