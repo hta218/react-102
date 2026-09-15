@@ -26,6 +26,10 @@ Forward is a fresh Next.js App Router storefront theme using
   collection and Shop grid behavior, Cart, and `/account/**`. Header and
   Footer are theme-owned components configured through theme settings, never
   Weaverse global sections.
+- Approved exception (2026-09-15): `product-spotlight` may embed the shared
+  `AddToCartForm` (`src/components/add-to-cart-form.tsx`) with a selection held
+  in component state. It never reads or writes the PDP's `colorway`/`size`
+  query state, and all cart logic stays inside the shared form.
 - A Weaverse component is the default export of its file and exports its
   `schema` from that same file, so settings and markup cannot drift apart and
   the registry cannot pair them up wrongly. This is the one place beyond Next's

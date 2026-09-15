@@ -1,21 +1,19 @@
 import type { WeaverseNextComponent } from "@weaverse/next";
 
-import type { Product, StorefrontImage } from "@/lib/storefront/types";
+import type { Product } from "@/lib/storefront/types";
 import { resolveProduct } from "@/lib/weaverse/resource";
 
 type LoaderArgs = Parameters<NonNullable<WeaverseNextComponent["loader"]>>[0];
 
-export type ProductSpotlightLoaderData = {
-  product: Product;
-  image: StorefrontImage;
-} | null;
+export type ProductSpotlightLoaderData = { product: Product } | null;
 
 /**
- * Resolves the spotlit product and its context image.
+ * Resolves the spotlit product.
  *
- * `null` when nothing is selected, the handle no longer resolves, or the
- * product has no context image — the section then renders a placeholder in
- * Studio and nothing on the storefront.
+ * `null` only when nothing is selected or the handle no longer resolves; the
+ * section then renders its placeholder. Images come from the selected
+ * colorway in the component, so a product without a context image still
+ * renders.
  */
 export async function loader({
   data,
@@ -23,7 +21,5 @@ export async function loader({
   const product = await resolveProduct(
     (data as { product?: unknown } | undefined)?.product,
   );
-  if (product === null) return null;
-  const image = product.colorways[0]?.images.context;
-  return image === undefined ? null : { image, product };
+  return product === null ? null : { product };
 }
