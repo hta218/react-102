@@ -37,6 +37,8 @@ export function Wordmark({ href = "/", variant = "header" }: WordmarkProps) {
         alt=""
         width={480}
         height={96}
+        /* The header lockup is above the fold and is the LCP element. */
+        loading={variant === "header" ? "eager" : undefined}
       />
     </Link>
   );
