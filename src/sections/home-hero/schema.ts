@@ -32,9 +32,6 @@ export const schema = createSchema({
       ],
     },
   ],
-  enabledOn: {
-    pages: ["INDEX"],
-  },
   presets: {
     children: [
       {

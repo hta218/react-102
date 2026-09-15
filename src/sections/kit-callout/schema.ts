@@ -45,9 +45,6 @@ export const schema = createSchema({
       ],
     },
   ],
-  enabledOn: {
-    pages: ["INDEX", "CUSTOM"],
-  },
   presets: {
     eyebrowLabel: "One-day kit",
     heading: "Carry the day, not the doubt.",

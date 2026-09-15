@@ -48,9 +48,6 @@ export const schema = createSchema({
       ],
     },
   ],
-  enabledOn: {
-    pages: ["INDEX", "CUSTOM"],
-  },
   presets: {
     repairEyebrowLabel: "Repair, not replace",
     repairHeading: "Keep equipment in motion.",

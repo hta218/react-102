@@ -17,9 +17,6 @@ export const schema = createSchema({
       ],
     },
   ],
-  enabledOn: {
-    pages: ["INDEX", "CUSTOM"],
-  },
   presets: {
     children: [
       {

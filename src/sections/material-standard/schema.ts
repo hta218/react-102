@@ -4,7 +4,6 @@ export const schema = createSchema({
   type: "material-standard",
   title: "Material standard",
   childTypes: ["section-content"],
-  enabledOn: { pages: ["INDEX", "CUSTOM"] },
   settings: [
     {
       group: "Content",
