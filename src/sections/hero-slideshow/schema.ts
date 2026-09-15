@@ -30,7 +30,6 @@ export const schema = createSchema({
         },
         imagePosition: "right-low",
         fieldTag: "N 49°13′ / 19°58′ E · 11 °C · Clear",
-        featuredProduct: { handle: "weatherline-shell" },
         children: [
           {
             type: "section-content",
@@ -89,7 +88,6 @@ export const schema = createSchema({
         },
         imagePosition: "right-low",
         fieldTag: "N 39°44′ / 106°17′ W · 9 °C · Wind 14 km/h",
-        featuredProduct: { handle: "ridge-30-field-pack" },
         children: [
           {
             type: "section-content",
@@ -121,7 +119,7 @@ export const schema = createSchema({
                   {
                     type: "button",
                     label: "Shop packs",
-                    href: "/shop/packs",
+                    href: "/shop",
                     intent: "signal",
                     tone: "light",
                   },
