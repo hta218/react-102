@@ -46,13 +46,6 @@
     rgba(10, 12, 9, 0.9),
     rgba(10, 12, 9, 0.08)
   );
-  --background-image-diagonal-strike: linear-gradient(
-    to top right,
-    transparent calc(50% - 1px),
-    currentColor calc(50% - 1px),
-    currentColor calc(50% + 1px),
-    transparent calc(50% + 1px)
-  );
   --background-image-system-card-overlay: linear-gradient(
     transparent,
     rgba(5, 8, 6, 0.94)

@@ -40,7 +40,7 @@ const optionChip = cva(
         false: "border-border-dark-strong bg-transparent",
       },
       soldOut: {
-        true: "line-through after:pointer-events-none after:absolute after:inset-0 after:bg-diagonal-strike after:content-['']",
+        true: "line-through",
         false: null,
       },
     },
