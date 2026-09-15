@@ -64,12 +64,12 @@ export function ProductCard({ product, priority }: ProductCardProps) {
         <p className="mt-1.25 font-body text-micro font-semibold text-text-muted uppercase max-sm:hidden">
           {product.category} / {product.activities.join(" · ")}
         </p>
-        <fieldset className="mt-1 flex min-h-touch items-center gap-1.25">
+        <fieldset className="mt-4 flex min-h-touch items-center gap-3">
           <legend className="sr-only">{product.title} colorway</legend>
           {product.colorways.map((entry) => (
             <label
               key={entry.id}
-              className="inline-flex size-touch flex-none items-center justify-center first-of-type:-ml-3"
+              className="inline-flex flex-none items-center justify-center"
             >
               <input
                 className="peer sr-only"
@@ -92,8 +92,7 @@ export function ProductCard({ product, priority }: ProductCardProps) {
             </label>
           ))}
           <span className="ml-auto pl-2.5 font-body text-nano text-text-muted tracking-label uppercase">
-            {activeColorway.name} ·{" "}
-            {String(product.colorways.length).padStart(2, "0")} colorways
+            {activeColorway.name}
           </span>
         </fieldset>
       </div>
